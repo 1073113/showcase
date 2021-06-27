@@ -1,11 +1,14 @@
 import asyncHandler from 'express-async-handler'
-import Product from '../models/productModel.js'
 import products from '../data/products.js'
+import Product from '../models/productModel.js'
+
 
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
-const getProducts = asyncHandler(async (req, res, products) => {
+const getProducts = asyncHandler(async (req, res) => {
+
+  console.log('hello')
   // const pageSize = 10
   // const page = Number(req.query.pageNumber) || 1
 
@@ -24,7 +27,7 @@ const getProducts = asyncHandler(async (req, res, products) => {
   //   .skip(pageSize * (page - 1))
 
   // res.json({ products, page, pages: Math.ceil(count / pageSize) })
-  res.json(products)
+  res.send(products)
 })
 
 // @desc    Fetch single product

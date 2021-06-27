@@ -2,7 +2,7 @@ import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
-// import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
 import productRoutes from './routes/productRoutes.js'
@@ -21,6 +21,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json())
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
+
 
 app.use('/api/products', productRoutes)
 // app.use('/api/users', userRoutes)
@@ -46,8 +52,8 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-// app.use(notFound)
-// app.use(errorHandler)
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
